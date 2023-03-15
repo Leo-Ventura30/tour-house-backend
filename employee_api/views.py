@@ -22,7 +22,7 @@ class StatusView(SingleObjectMixin):
         return Response({'detail': f'{self.object} inativado'})
 
 
-class CompanyViewSet(viewsets.ModelViewSet):
+class CompanyViewSet(StatusView, viewsets.ModelViewSet):
     queryset = Company.objects.filter()
     serializer_class = CompanySerializer
     permission_classes = [IsAuthenticated]
@@ -32,7 +32,7 @@ class CompanyViewSet(viewsets.ModelViewSet):
     ordering_fields = ['cnpj', 'active']
 
 
-class DepartmentViewSet(viewsets.ModelViewSet):
+class DepartmentViewSet(StatusView, viewsets.ModelViewSet):
     queryset = Department.objects.filter()
     serializer_class = DepartmentSerializer
     permission_classes = [IsAuthenticated]
@@ -50,7 +50,7 @@ class EmployeeViewSet(StatusView, viewsets.ModelViewSet):
     ordering_fields = ['active']
 
 
-class ErpProviderViewSet(viewsets.ModelViewSet):
+class ErpProviderViewSet(StatusView, viewsets.ModelViewSet):
     queryset = ErpProvider.objects.filter()
     serializer_class = ErpProviderSerializer
     permission_classes = [IsAuthenticated]
